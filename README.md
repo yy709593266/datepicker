@@ -59,5 +59,3 @@ var position = {
 options
 
 渲染日历时是需要将这几个参数进行合并,`$.extend()`方法
-
-[index.html](http://htmlpreview.github.com/?https://github.com/yy709593266/datepicker/blob/master/index.html)
