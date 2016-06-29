@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>日历组件</title>
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<link rel="stylesheet" type="text/css" href="css/datepicker.css">
+</head>
+<body>
+	<div class="wrap">
+		<div class="list">
+			<label>日期：</label>
+			<input type="text" name="datepicker" value="2015-5-20" id="datepicker">
+		</div>
+	</div>
+
+	<script src="js/jquery-3.0.0.min.js"></script>
+	<script src="js/datepicker.js"></script>
+	<script>
+		$('#datepicker').datePicker({
+			dateWidth: 70
+		});
+	</script>
+</body>
+</html>
