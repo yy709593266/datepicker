@@ -22,25 +22,25 @@
 	function createMainEle(options){
 		this.options = $.extend({}, defaults, options);
 		this.mainEle = $('<div id="datePicker"></div>')
-					.addClass('main-ele-' + this.options.theme)
+					.addClass('dp-main-ele-' + this.options.theme)
 					.css('width', this.options.dateWidth * 7 + 'px')
 					.css('height', this.options.dateHeight * 7 + 50 + 'px')
 					.css('left', this.options.left + 'px')
 					.css('top', this.options.top + 'px')
 					.appendTo('body');
 		var p = $('<p></p>')
-				.addClass('header-' + this.options.theme)
+				.addClass('dp-header-' + this.options.theme)
 				.appendTo(this.mainEle);
-		var title = $('<strong></strong>').addClass('title-text').appendTo(p);
+		var title = $('<strong></strong>').addClass('dp-title-text').appendTo(p);
 		var _this = this;
 		var btnLeft = $('<strong><-</strong>')
-					.addClass('btn-left')
+					.addClass('dp-btn-left')
 					.appendTo(p)
 					.on('click', function(){
 						_this.prevMonth();
 					});
 		var btnRight = $('<strong>-></strong>')
-					.addClass('btn-right')
+					.addClass('dp-btn-right')
 					.appendTo(p)
 					.on('click', function(){
 						_this.nextMonth();
@@ -49,7 +49,7 @@
 		for (var i = 0; i < 7; i++) {
 			var weekEle = createEle.call(this).html(this.days[i]).appendTo(this.mainEle);
 			if (i == 0 || i == 6) {
-				weekEle.addClass('week-style-' + this.options.theme);
+				weekEle.addClass('dp-week-style-' + this.options.theme);
 			}
 		}
 		// 创建日期框
@@ -75,7 +75,7 @@
 	// 创建日历中的所有span，包括星期和日期框
 	function createEle(){
 		var spanEle = $('<span></span>')
-					.addClass('date-ele')
+					.addClass('dp-date-ele')
 					.css('width', this.options.dateWidth + 'px')
 					.css('height', this.options.dateHeight + 'px')
 					.css('line-height', this.options.dateHeight + 'px');
@@ -94,7 +94,7 @@
 		// 渲染日期元素到框架中
 		renderByDate: function(date){
 			var _titleText = date.getFullYear() + this.options.separator + (date.getMonth() + 1) + this.options.separator + date.getDate() + this.options.separator + '周' + this.days[date.getDay()];
-			$('.title-text').html(_titleText);
+			$('.dp-title-text').html(_titleText);
 			this.$ele.val(_titleText);
 			var _date = new Date(date);
 			_date.setDate(1); // 找到该月的一号
@@ -102,17 +102,17 @@
 			var allSpan = $('span');
 			for (var i = 0; i < 42; i++) {
 				var ele = $(allSpan.get(i + 7)).html(_date.getDate());
-				ele.removeClass('other-month').removeClass('week-style-' + this.options.theme).removeClass('active-' + this.options.theme);
+				ele.removeClass('dp-other-month').removeClass('dp-week-style-' + this.options.theme).removeClass('dp-active-' + this.options.theme);
 				// 不是当月的样式，以及周末的样式
 				if (_date.getMonth() !== date.getMonth()) {
-					ele.addClass('other-month');
+					ele.addClass('dp-other-month');
 				}else if(_date.getDay() == 0 || _date.getDay() == 6) {
-					ele.addClass('week-style-' + this.options.theme);
+					ele.addClass('dp-week-style-' + this.options.theme);
 				}
 				// 选中当天样式
 				// getTime()时间戳毫秒数
 				if (_date.getTime() == date.getTime()) {
-					ele.addClass('active-' + this.options.theme);
+					ele.addClass('dp-active-' + this.options.theme);
 					this.selectedEle = ele;
 				}
 				_date.setDate(_date.getDate() + 1);
@@ -129,7 +129,7 @@
 			this.gotoDate(_date);
 		}, 
 		gotoDate: function(date){
-			this.selectedEle.removeClass('active-' + this.options.theme);
+			this.selectedEle.removeClass('dp-active-' + this.options.theme);
 			// 如果点选的是本月的日期就直接改变样式就行了
 			// 如果点选的是灰色即不是本月的就重新渲染整个日历
 			// (当然，也可以不用这个函数，直接每次选择都重新渲染日历)
@@ -137,9 +137,9 @@
 				var _allSpan = $('span');
 				var _selectedIndex = _allSpan.index(this.selectedEle);
 				var _temp = _allSpan.get(_selectedIndex + date.getDate() - this.date.getDate());
-				this.selectedEle = $(_temp).addClass('active-' + this.options.theme);
+				this.selectedEle = $(_temp).addClass('dp-active-' + this.options.theme);
 				var _dateText = date.getFullYear() + this.options.separator + (date.getMonth() + 1) + this.options.separator + date.getDate() + this.options.separator + '周' + this.days[date.getDay()];
-				$('.date-text').html(_dateText);
+				$('.dp-title-text').html(_dateText);
 				this.$ele.val(_dateText);
 			}else {
 				this.renderByDate(date);
@@ -162,7 +162,7 @@
 						options = position;
 					}
 					init.call(_this, options);
-				}else if($('#datePicker')[0] && _this.$ele.attr('id') != $(e.target).attr('id') && $(e.target).parent().attr('id') != 'datePicker' && $(e.target).parent().attr('class') != 'header-' + _this.options.theme){
+				}else if($('#datePicker')[0] && !/^dp-/.test($(e.target).attr('class'))){
 					$('#datePicker').remove();
 				}
 			});
