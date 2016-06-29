@@ -84,7 +84,6 @@
 
 	// 构造日历插件函数
 	function DatePicker($ele, options){
-		this.flag = false;
 		this.$ele = $ele;
 		this.judge(options);
 	}
