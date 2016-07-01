@@ -50,13 +50,23 @@ var defaults = {
 ```
 位置参数
 ```
+// 日历相对元素的距离
 var position = {
 	left: _this.$ele.offset().left + _this.$ele.width() + 5,
-	top: _this.$ele.offset().top + _this.$ele.height() + 5
-}
+	top: _this.$ele.offset().top + _this.$ele.height() + 5 
 ```
 自定义参数
 options
+
+#### 注意
+选择框选择日期时触发change事件，但是点击日期如果不是本月的日期同样也会触发change事件，所以在select选择日期触发change事件来获取日期值时，应该限制在click这个select元素的时候，并且这个select元素值change时触发事件
+```
+$('.dp-select-year').on('click', function(){
+	$(this).on('change', function(){
+		// codes
+	});
+});
+```
 
 渲染日历时是需要将这几个参数进行合并,`$.extend()`方法
 

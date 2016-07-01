@@ -19,6 +19,7 @@
 	text-align: center;
 	border: 1px solid #dcdcdd;
 	color: #4b555b;
+	border-radius: 4px;
 }
 .list span {
 	margin: 0 10px 0 10px;
