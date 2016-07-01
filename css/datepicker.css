@@ -105,6 +105,7 @@ body {
 .dp-date-ele {
 	display: inline-block;
 	text-align: center;
+	border-radius: 50%;
 }
 .dp-week-style-primary {
 	color: #337ab7;
